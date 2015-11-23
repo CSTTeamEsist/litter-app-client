@@ -9,6 +9,8 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
+    //private FragmentManager fragmentManager = getFragmentManager();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
