@@ -1,16 +1,18 @@
 package com.mattbozelka.cleanupstars;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements LoginFragment.Callback{
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
-    //private FragmentManager fragmentManager = getFragmentManager();
-
+    private static final String LOGINFRAGMENT_TAG = "LOGINTAG";
+    private FragmentManager fragmentManager = getFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fragmentManager.beginTransaction()
+                .add(R.id.view_holder, new LoginFragment(), LOGINFRAGMENT_TAG)
+                .commit();
 
     }
 
@@ -41,5 +47,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void loadUI(int loadById) {
+
+        switch (loadById){
+            case 0:
+                // loading the user home fragment
+                fragmentManager.beginTransaction()
+                        .remove(fragmentManager.findFragmentByTag(LOGINFRAGMENT_TAG))
+                        .add(R.id.view_holder, new LitterListActivityFragment())
+                        .commit();
+                break;
+            case 1:
+                // loading the create an account fragment
+                break;
+        };
+
     }
 }

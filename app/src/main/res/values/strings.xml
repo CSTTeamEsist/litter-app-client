@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">CleanUp Stars</string>
     <string name="action_settings">Settings</string>
+
+
+    <!-- Log in screen -->
+    <string name="log_in">Log in</string>
+
+    <!-- Create account screen -->
+    <string name="create_account_submit">Create account</string>
+
 </resources>
