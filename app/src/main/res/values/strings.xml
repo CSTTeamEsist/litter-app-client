@@ -3,10 +3,16 @@
     <string name="action_settings">Settings</string>
 
 
-    <!-- Log in screen -->
+    <!-- Log in Fragment -->
     <string name="log_in">Log in</string>
+    <string name="create_account">Create account</string>
 
-    <!-- Create account screen -->
+
+    <!-- Create account Fragment -->
     <string name="create_account_submit">Create account</string>
+
+
+    <!-- User Home Fragment -->
+    <string name="event_management">Events List</string>
 
 </resources>

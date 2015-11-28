@@ -54,14 +54,24 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Cal
 
         switch (loadById){
             case 0:
-                // loading the user home fragment
+                // loading the create an account fragment
                 fragmentManager.beginTransaction()
                         .remove(fragmentManager.findFragmentByTag(LOGINFRAGMENT_TAG))
-                        .add(R.id.view_holder, new LitterListActivityFragment())
+                        .add(R.id.view_holder, new LoginFragment())
                         .commit();
                 break;
             case 1:
                 // loading the create an account fragment
+                fragmentManager.beginTransaction()
+                        .remove(fragmentManager.findFragmentByTag(LOGINFRAGMENT_TAG))
+                        .add(R.id.view_holder, new CreateAccountFragment())
+                        .commit();
+                break;
+            case 2:
+                fragmentManager.beginTransaction()
+                        .remove(fragmentManager.findFragmentByTag(LOGINFRAGMENT_TAG))
+                        .add(R.id.view_holder, new UserHomeFragment())
+                        .commit();
                 break;
         };
 
