@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ public class LoginFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.i(LOG_TAG, "onCreate");
     }
 
     @Nullable
@@ -38,37 +41,51 @@ public class LoginFragment extends Fragment{
         Button loginBtn = (Button) root.findViewById(R.id.login_btn);
         loginBtn.setOnClickListener(new LoginAction());
 
+        Button createAccount = (Button) root.findViewById((R.id.create_account_btn));
+        createAccount.setOnClickListener(new CreateAccountAction());
+
+        Log.i(LOG_TAG, "onCreateView");
+
         return root;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+
+        Log.i(LOG_TAG, "onStart");
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        Log.i(LOG_TAG, "onResume");
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        Log.i(LOG_TAG, "onSaveInstanceState");
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        Log.i(LOG_TAG, "onPause");
     }
 
     @Override
     public void onStop() {
         super.onStop();
+
+        Log.i(LOG_TAG, "onStop");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i(LOG_TAG, "onDestroy");
     }
 
 
@@ -76,7 +93,16 @@ public class LoginFragment extends Fragment{
 
         @Override
         public void onClick(View v) {
-            ((Callback) context).loadUI(0);
+            ((Callback) context).loadUI(2);
+        }
+
+    }
+
+    private class CreateAccountAction implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            ((Callback) context).loadUI(1);
         }
 
     }

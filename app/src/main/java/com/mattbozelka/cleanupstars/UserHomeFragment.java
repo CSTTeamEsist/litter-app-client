@@ -1,7 +1,6 @@
 package com.mattbozelka.cleanupstars;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,19 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class CreateAccountFragment extends Fragment{
 
-    private final String LOG_TAG = CreateAccountFragment.class.getSimpleName();
-    private Context context;
+public class UserHomeFragment extends Fragment{
 
-    public CreateAccountFragment() {}
 
-    /**
-     * CALL BACK to be used by the main activity so it can unload and load
-     * the user fragment once log in has been successful
-     */
-    public interface Callback {
-        public void loadUI(int loadById);
+    public UserHomeFragment() {
     }
 
     @Override
@@ -32,11 +23,10 @@ public class CreateAccountFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root =  inflater.inflate(R.layout.fragment_create_account, container, false);
-        context = getActivity();
+        View root =  inflater.inflate(R.layout.fragment_user_home, container, false);
 
-        Button createAccountBtn = (Button) root.findViewById(R.id.create_account_btn);
-        createAccountBtn.setOnClickListener(new CreateAccountAction());
+        Button eventManagementBtn = (Button) root.findViewById(R.id.event_management_btn);
+        eventManagementBtn.setOnClickListener(new ViewEventsAction());
 
         return root;
     }
@@ -49,11 +39,6 @@ public class CreateAccountFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -71,12 +56,15 @@ public class CreateAccountFragment extends Fragment{
         super.onDestroy();
     }
 
+    private class ViewEventsAction implements View.OnClickListener{
 
-    private class CreateAccountAction implements View.OnClickListener{
 
         @Override
         public void onClick(View v) {
-            ((Callback) getActivity()).loadUI(2);
+
+            // to do launch Event List Activity
+            // Intent intent = new Intent(this, DisplayMessageActivity.class);
+
         }
 
     }
