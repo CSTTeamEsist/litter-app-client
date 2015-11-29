@@ -7,11 +7,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mattbozelka.callbacks.MainActivityCallback;
+import com.mattbozelka.model.LaunchFragmentsContract;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.Callback{
+
+public class MainActivity extends AppCompatActivity implements MainActivityCallback{
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
-    private static final String LOGINFRAGMENT_TAG = "LOGINTAG";
     private FragmentManager fragmentManager = getFragmentManager();
 
     @Override
@@ -21,9 +23,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Cal
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        fragmentManager.beginTransaction()
-                .add(R.id.view_holder, new LoginFragment(), LOGINFRAGMENT_TAG)
-                .commit();
+        loadUI(LaunchFragmentsContract.LOGIN_SCREEN_ID);
 
     }
 
@@ -53,26 +53,26 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Cal
     public void loadUI(int loadById) {
 
         switch (loadById){
-            case 0:
+            case LaunchFragmentsContract.LOGIN_SCREEN_ID:
+                // loading the log in frag
+                fragmentManager.beginTransaction()
+                        .replace(R.id.view_holder, new LoginFragment(),
+                                LaunchFragmentsContract.LOGIN_FRAGMENT_TAG)
+                        .commit();
+                break;
+            case LaunchFragmentsContract.CREATE_ACCOUNT_SCREEN_ID:
                 // loading the create an account fragment
                 fragmentManager.beginTransaction()
-                        .remove(fragmentManager.findFragmentByTag(LOGINFRAGMENT_TAG))
-                        .add(R.id.view_holder, new LoginFragment())
+                        .replace(R.id.view_holder, new CreateAccountFragment(),
+                                LaunchFragmentsContract.CREATE_ACCOUNT_FRAGMENT_TAG)
                         .commit();
                 break;
-            case 1:
-                // loading the create an account fragment
+            case LaunchFragmentsContract.USER_HOME_SCREEN_ID:
+                // loading the User Home Frag
                 fragmentManager.beginTransaction()
-                        .remove(fragmentManager.findFragmentByTag(LOGINFRAGMENT_TAG))
-                        .add(R.id.view_holder, new CreateAccountFragment())
+                        .replace(R.id.view_holder, new UserHomeFragment(),
+                                LaunchFragmentsContract.USER_HOME_FRAGMENT_TAG)
                         .commit();
-                break;
-            case 2:
-                fragmentManager.beginTransaction()
-                        .remove(fragmentManager.findFragmentByTag(LOGINFRAGMENT_TAG))
-                        .add(R.id.view_holder, new UserHomeFragment())
-                        .commit();
-                break;
         };
 
     }

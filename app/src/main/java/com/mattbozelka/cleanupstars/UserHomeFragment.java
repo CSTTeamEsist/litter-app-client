@@ -1,6 +1,7 @@
 package com.mattbozelka.cleanupstars;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -62,8 +63,8 @@ public class UserHomeFragment extends Fragment{
         @Override
         public void onClick(View v) {
 
-            // to do launch Event List Activity
-            // Intent intent = new Intent(this, DisplayMessageActivity.class);
+            Intent intent = new Intent(getActivity(), EventManagementActivity.class);
+            startActivity(intent);
 
         }
 
