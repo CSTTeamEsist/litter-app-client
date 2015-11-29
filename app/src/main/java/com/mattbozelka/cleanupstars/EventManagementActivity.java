@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mattbozelka.model.LaunchFragmentsContract;
+
 public class EventManagementActivity extends AppCompatActivity {
     private final String LOG_TAG = EventManagementActivity.class.getSimpleName();
     private FragmentManager fragmentManager = getFragmentManager();
@@ -15,9 +17,14 @@ public class EventManagementActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_event_management);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fragmentManager.beginTransaction()
+                .add(R.id.event_management_fragment_holder, new EventListFragment(),
+                        LaunchFragmentsContract.EVENT_LIST_TAG)
+                .commit();
 
     }
 
