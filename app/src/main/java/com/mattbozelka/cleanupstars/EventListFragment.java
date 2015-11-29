@@ -5,11 +5,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.mattbozelka.AsyncTasks.EventListGetTask;
+import com.mattbozelka.com.mattbozelka.custom.adapters.EventListAdapter;
+import com.mattbozelka.model.Event;
+
+import java.util.ArrayList;
 
 
 public class EventListFragment extends Fragment {
 
     private final String LOG_TAG = EventListFragment.class.getSimpleName();
+    private EventListAdapter mEventListAdapter;
+    private ArrayList<Event> events = new ArrayList<Event>();
 
     public EventListFragment() {}
 
@@ -19,9 +28,41 @@ public class EventListFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_event_list, container, false);
 
+        mEventListAdapter = new EventListAdapter(
+                getActivity(),
+                R.layout.event_item,
+                events);
+
+        ListView eventListView = (ListView) rootView.findViewById(R.id.event_list_view);
+        eventListView.setAdapter(mEventListAdapter);
+
+        getEvents();
 
         return rootView;
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // System pref example for when ready
+//        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        String checkSortOrder = prefs.getString(getString(R.string.display_preferences_sort_order_key),
+//                getString(R.string.display_preferences_sort_default_value));
+
+
+//        getEvents();
+
+    }
+
+
+    private void getEvents() {
+
+        // fetch the events from the API
+        EventListGetTask getEventsTask = new EventListGetTask(mEventListAdapter);
+        getEventsTask.execute();
+
+    }
 
 }
