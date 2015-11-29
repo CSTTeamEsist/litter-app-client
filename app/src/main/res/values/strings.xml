@@ -5,14 +5,27 @@
 
     <!-- Log in Fragment -->
     <string name="log_in">Log in</string>
-    <string name="create_account">Create account</string>
+    <string name="create_account_btn">Create Account</string>
 
 
     <!-- Create account Fragment -->
-    <string name="create_account_submit">Create account</string>
+    <string name="create_account_submit_btn">Create Account</string>
 
 
     <!-- User Home Fragment -->
-    <string name="event_management">Events List</string>
+    <string name="event_management_btn">Events near by</string>
+
+
+    <!-- Event management Activity -->
+    <string name="event_management_name">Events</string>
+
+
+    <!-- Event List Fragment -->
+    <string name="event_list_name">Events</string>
+
+
+    <!-- Event Collections Fragment -->
+    <string name="event_collections_name">Event 101</string>
+
 
 </resources>

@@ -16,7 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:id="@+id/createFirstName" />
 
@@ -24,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:id="@+id/createLastName" />
 
@@ -45,8 +43,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_account_submit"
-        android:id="@+id/create_account_btn"
+        android:text="@string/create_account_submit_btn"
+        android:id="@+id/submit_create_account_btn"
         android:layout_gravity="center_horizontal" />
 
 

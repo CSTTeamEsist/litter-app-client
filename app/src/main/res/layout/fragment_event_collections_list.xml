@@ -6,12 +6,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.mattbozelka.cleanupstars.LitterListActivityFragment"
+    tools:context="com.mattbozelka.cleanupstars.EventCollectionsListFragment"
     android:orientation="vertical">
 
 
     <GridView
-        android:id="@+id/litter_list_grid"
+        android:id="@+id/event_collections_list_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:verticalSpacing="16dp"

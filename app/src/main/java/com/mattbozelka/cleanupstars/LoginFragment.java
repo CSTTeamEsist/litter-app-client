@@ -1,7 +1,6 @@
 package com.mattbozelka.cleanupstars;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -10,20 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.mattbozelka.callbacks.MainActivityCallback;
+import com.mattbozelka.model.LaunchFragmentsContract;
+
 public class LoginFragment extends Fragment{
 
     private final String LOG_TAG = LoginFragment.class.getSimpleName();
-    private Context context;
 
     public LoginFragment() {}
 
-    /**
-     * CALL BACK to be used by the main activity so it can unload and load
-     * the user fragment once log in has been successful
-     */
-    public interface Callback {
-        public void loadUI(int loadById);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +30,6 @@ public class LoginFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root =  inflater.inflate(R.layout.fragment_login, container, false);
-        context = getActivity();
 
         Button loginBtn = (Button) root.findViewById(R.id.login_btn);
         loginBtn.setOnClickListener(new LoginAction());
@@ -93,7 +86,8 @@ public class LoginFragment extends Fragment{
 
         @Override
         public void onClick(View v) {
-            ((Callback) context).loadUI(2);
+            ((MainActivityCallback) getActivity())
+                    .loadUI(LaunchFragmentsContract.USER_HOME_SCREEN_ID);
         }
 
     }
@@ -102,7 +96,8 @@ public class LoginFragment extends Fragment{
 
         @Override
         public void onClick(View v) {
-            ((Callback) context).loadUI(1);
+            ((MainActivityCallback) getActivity())
+                    .loadUI(LaunchFragmentsContract.CREATE_ACCOUNT_SCREEN_ID);
         }
 
     }

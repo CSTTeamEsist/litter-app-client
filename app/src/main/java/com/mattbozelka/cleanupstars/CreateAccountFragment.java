@@ -9,20 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.mattbozelka.callbacks.MainActivityCallback;
+import com.mattbozelka.model.LaunchFragmentsContract;
+
 public class CreateAccountFragment extends Fragment{
 
     private final String LOG_TAG = CreateAccountFragment.class.getSimpleName();
     private Context context;
 
     public CreateAccountFragment() {}
-
-    /**
-     * CALL BACK to be used by the main activity so it can unload and load
-     * the user fragment once log in has been successful
-     */
-    public interface Callback {
-        public void loadUI(int loadById);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,9 +28,8 @@ public class CreateAccountFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root =  inflater.inflate(R.layout.fragment_create_account, container, false);
-        context = getActivity();
 
-        Button createAccountBtn = (Button) root.findViewById(R.id.create_account_btn);
+        Button createAccountBtn = (Button) root.findViewById(R.id.submit_create_account_btn);
         createAccountBtn.setOnClickListener(new CreateAccountAction());
 
         return root;
@@ -76,7 +70,8 @@ public class CreateAccountFragment extends Fragment{
 
         @Override
         public void onClick(View v) {
-            ((Callback) getActivity()).loadUI(2);
+            ((MainActivityCallback) getActivity())
+                    .loadUI(LaunchFragmentsContract.USER_HOME_SCREEN_ID);
         }
 
     }

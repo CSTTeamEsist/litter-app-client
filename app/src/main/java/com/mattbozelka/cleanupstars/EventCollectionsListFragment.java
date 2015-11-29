@@ -16,13 +16,13 @@ import java.util.ArrayList;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class LitterListActivityFragment extends Fragment {
+public class EventCollectionsListFragment extends Fragment {
 
-    private final String LOG_TAG = LitterListActivityFragment.class.getSimpleName();
+    private final String LOG_TAG = EventCollectionsListFragment.class.getSimpleName();
     private LitterListAdapter mLitterListAdapter;
     private ArrayList<LitterPiece> litterItems = new ArrayList<LitterPiece>();
 
-    public LitterListActivityFragment() {
+    public EventCollectionsListFragment() {
     }
 
 
@@ -51,7 +51,7 @@ public class LitterListActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_litter_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_event_collections_list, container, false);
 
         mLitterListAdapter = new LitterListAdapter(
                 getActivity(),
@@ -59,7 +59,7 @@ public class LitterListActivityFragment extends Fragment {
                 litterItems);
 
 
-        GridView litterGridView = (GridView) rootView.findViewById(R.id.litter_list_grid);
+        GridView litterGridView = (GridView) rootView.findViewById(R.id.event_collections_list_grid);
         litterGridView.setAdapter(mLitterListAdapter);
 
         litterGridView.setOnItemClickListener(new ItemAdded());
