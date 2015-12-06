@@ -1,5 +1,6 @@
 package com.mattbozelka.cleanupstars;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        loadUI(LaunchFragmentsContract.LOGIN_SCREEN_ID);
+        loadUI(LaunchFragmentsContract.CREATE_ACCOUNT_SCREEN_ID);
 
     }
 
@@ -52,27 +53,44 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
     @Override
     public void loadUI(int loadById) {
 
+        Fragment frag = null;
+
         switch (loadById){
             case LaunchFragmentsContract.LOGIN_SCREEN_ID:
                 // loading the log in frag
-                fragmentManager.beginTransaction()
-                        .replace(R.id.view_holder, new LoginFragment(),
-                                LaunchFragmentsContract.LOGIN_FRAGMENT_TAG)
-                        .commit();
+                frag = fragmentManager
+                        .findFragmentByTag(LaunchFragmentsContract.LOGIN_FRAGMENT_TAG);
+
+                if(frag == null){
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.view_holder, new LoginFragment(),
+                                    LaunchFragmentsContract.LOGIN_FRAGMENT_TAG)
+                            .commit();
+                }
                 break;
             case LaunchFragmentsContract.CREATE_ACCOUNT_SCREEN_ID:
                 // loading the create an account fragment
-                fragmentManager.beginTransaction()
-                        .replace(R.id.view_holder, new CreateAccountFragment(),
-                                LaunchFragmentsContract.CREATE_ACCOUNT_FRAGMENT_TAG)
-                        .commit();
+                frag = fragmentManager
+                        .findFragmentByTag(LaunchFragmentsContract.CREATE_ACCOUNT_FRAGMENT_TAG);
+
+                if(frag == null){
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.view_holder, new CreateAccountFragment(),
+                                    LaunchFragmentsContract.CREATE_ACCOUNT_FRAGMENT_TAG)
+                            .commit();
+                }
                 break;
             case LaunchFragmentsContract.USER_HOME_SCREEN_ID:
                 // loading the User Home Frag
-                fragmentManager.beginTransaction()
-                        .replace(R.id.view_holder, new UserHomeFragment(),
-                                LaunchFragmentsContract.USER_HOME_FRAGMENT_TAG)
-                        .commit();
+                frag = fragmentManager
+                        .findFragmentByTag(LaunchFragmentsContract.USER_HOME_FRAGMENT_TAG);
+
+                if(frag == null){
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.view_holder, new UserHomeFragment(),
+                                    LaunchFragmentsContract.USER_HOME_FRAGMENT_TAG)
+                            .commit();
+                }
         };
 
     }

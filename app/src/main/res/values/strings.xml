@@ -27,5 +27,11 @@
     <!-- Event Collections Fragment -->
     <string name="event_collections_name">Event 101</string>
 
+    <!-- Create account page -->
+    <string name="fnameLabel">First Name</string>
+    <string name="lnameLabel">Last Name</string>
+    <string name="emailLabel">Email</string>
+    <string name="passwordLabel">Password</string>
+    <string name="formError">Invalid Information</string>
 
 </resources>

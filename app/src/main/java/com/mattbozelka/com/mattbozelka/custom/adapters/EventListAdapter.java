@@ -13,7 +13,7 @@ import com.mattbozelka.model.Event;
 
 import java.util.ArrayList;
 
-public class EventListAdapter extends ArrayAdapter<Event> {
+    public class EventListAdapter extends ArrayAdapter<Event> {
 
     private final String LOG_TAG = LitterListAdapter.class.getSimpleName();
     private int layoutId;

@@ -9,11 +9,14 @@
         <item name="android:windowBackground">@color/white</item>
         <item name="android:colorBackground">@color/white</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- text defaults -->
@@ -30,6 +33,18 @@
     <style name="ActionText" parent="AppTheme">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/textSecondary</item>
+    </style>
+
+    <style name="TextViewLabel" parent="AppTheme">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/textSecondary</item>
+    </style>
+
+    <style name="TextError" parent="AppTheme">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/red</item>
     </style>
 
 </resources>
