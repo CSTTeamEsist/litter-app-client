@@ -46,8 +46,11 @@ public class EventListGetTask extends AsyncTask<Void, Void, ArrayList<Event>> {
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
+            Log.i(LOG_TAG, "connected");
+
             InputStream inputStream = urlConnection.getInputStream();
             StringBuffer buffer = new StringBuffer();
+
 
             if (inputStream == null) {
                 System.out.println("system string was null");

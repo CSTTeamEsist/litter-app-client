@@ -1,12 +1,12 @@
 package com.mattbozelka.cleanupstars;
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.ListView;
 
 import com.mattbozelka.com.mattbozelka.custom.adapters.LitterListAdapter;
 import com.mattbozelka.model.LitterPiece;
@@ -31,12 +31,17 @@ public class EventCollectionsListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         litterItems.clear();
-        LitterPiece l1 = new LitterPiece("Rubber", 0, "icon1");
-        LitterPiece l2 = new LitterPiece("Glass", 0, "icon2");
-        LitterPiece l3 = new LitterPiece("Plastic", 0, "icon3");
-        LitterPiece l4 = new LitterPiece("Metal", 0, "icon4");
-        LitterPiece l5 = new LitterPiece("Cigarette Butts", 0, "icon5");
-        LitterPiece l6 = new LitterPiece("Misc", 0, "icon6");
+        LitterPiece l1 = new LitterPiece("Bags (Paper)", 0, "cig_icon");
+        LitterPiece l2 = new LitterPiece("Bags (Plastic)", 0, "cig_icon");
+        LitterPiece l3 = new LitterPiece("Beverage Bottles (Plastic)", 0, "platic_bottle_icon");
+        LitterPiece l4 = new LitterPiece("Beverage Bottles (Glass)", 0, "cig_icon");
+        LitterPiece l5 = new LitterPiece("Caps, Lids", 0, "cig_icon");
+        LitterPiece l6 = new LitterPiece("Cigarette / Cigarette Butts", 0, "cig_icon");
+        LitterPiece l7 = new LitterPiece("Beverage Cans", 0, "cig_icon");
+        LitterPiece l8 = new LitterPiece("Food Wrappers / Containers", 0, "cig_icon");
+        LitterPiece l9 = new LitterPiece("Cups, Plates, Forks, Knives, Spoons", 0, "cig_icon");
+        LitterPiece l10 = new LitterPiece("Straws, Stirrers", 0, "cig_icon");
+        LitterPiece l11 = new LitterPiece("Misc", 0, "cig_icon");
 
         litterItems.add(l1);
         litterItems.add(l2);
@@ -44,6 +49,11 @@ public class EventCollectionsListFragment extends Fragment {
         litterItems.add(l4);
         litterItems.add(l5);
         litterItems.add(l6);
+        litterItems.add(l7);
+        litterItems.add(l8);
+        litterItems.add(l9);
+        litterItems.add(l10);
+        litterItems.add(l11);
     }
 
 
@@ -52,6 +62,8 @@ public class EventCollectionsListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_event_collections_list, container, false);
+        ((EventManagementActivity) getActivity()).setActionBarTitle("Event Name");
+        ((EventManagementActivity) getActivity()).setActionBarSubTitle("Check List");
 
         mLitterListAdapter = new LitterListAdapter(
                 getActivity(),
@@ -59,7 +71,7 @@ public class EventCollectionsListFragment extends Fragment {
                 litterItems);
 
 
-        GridView litterGridView = (GridView) rootView.findViewById(R.id.event_collections_list_grid);
+        ListView litterGridView = (ListView) rootView.findViewById(R.id.event_collections_list);
         litterGridView.setAdapter(mLitterListAdapter);
 
         litterGridView.setOnItemClickListener(new ItemAdded());

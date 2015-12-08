@@ -15,16 +15,25 @@ import com.mattbozelka.model.LaunchFragmentsContract;
 public class MainActivity extends AppCompatActivity implements MainActivityCallback{
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private final String STORED_FRAG = "storeFrag";
     private FragmentManager fragmentManager = getFragmentManager();
+    private Toolbar toolbar;
+    private int currentFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        loadUI(LaunchFragmentsContract.CREATE_ACCOUNT_SCREEN_ID);
+        if(savedInstanceState != null){
+            currentFrag = savedInstanceState.getInt(STORED_FRAG);
+        }else{
+            currentFrag = LaunchFragmentsContract.LOGIN_SCREEN_ID;
+        }
+
+        loadUI(currentFrag);
 
     }
 
@@ -51,47 +60,52 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
     }
 
     @Override
-    public void loadUI(int loadById) {
+    public void onSaveInstanceState(Bundle outState){
 
-        Fragment frag = null;
+            outState.putInt(STORED_FRAG, currentFrag);
+        super.onSaveInstanceState(outState);
+    }
+
+    public void loadUI(int loadById) {
 
         switch (loadById){
             case LaunchFragmentsContract.LOGIN_SCREEN_ID:
-                // loading the log in frag
-                frag = fragmentManager
-                        .findFragmentByTag(LaunchFragmentsContract.LOGIN_FRAGMENT_TAG);
-
-                if(frag == null){
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.view_holder, new LoginFragment(),
-                                    LaunchFragmentsContract.LOGIN_FRAGMENT_TAG)
-                            .commit();
-                }
+                // loading the Log in Frag
+                loadFragment(R.id.view_holder,
+                        new LoginFragment(),
+                        LaunchFragmentsContract.LOGIN_SCREEN_ID,
+                        LaunchFragmentsContract.LOGIN_FRAGMENT_TAG);
                 break;
             case LaunchFragmentsContract.CREATE_ACCOUNT_SCREEN_ID:
                 // loading the create an account fragment
-                frag = fragmentManager
-                        .findFragmentByTag(LaunchFragmentsContract.CREATE_ACCOUNT_FRAGMENT_TAG);
-
-                if(frag == null){
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.view_holder, new CreateAccountFragment(),
-                                    LaunchFragmentsContract.CREATE_ACCOUNT_FRAGMENT_TAG)
-                            .commit();
-                }
+                loadFragment(R.id.view_holder,
+                        new CreateAccountFragment(),
+                        LaunchFragmentsContract.CREATE_ACCOUNT_SCREEN_ID,
+                        LaunchFragmentsContract.CREATE_ACCOUNT_FRAGMENT_TAG);
                 break;
-            case LaunchFragmentsContract.USER_HOME_SCREEN_ID:
+            case LaunchFragmentsContract.EVENT_ID:
                 // loading the User Home Frag
-                frag = fragmentManager
-                        .findFragmentByTag(LaunchFragmentsContract.USER_HOME_FRAGMENT_TAG);
-
-                if(frag == null){
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.view_holder, new UserHomeFragment(),
-                                    LaunchFragmentsContract.USER_HOME_FRAGMENT_TAG)
-                            .commit();
-                }
+                loadFragment(R.id.view_holder,
+                        new UserHomeFragment(),
+                        LaunchFragmentsContract.USER_HOME_SCREEN_ID,
+                        LaunchFragmentsContract.USER_HOME_FRAGMENT_TAG);
+                break;
         };
 
+    }
+
+    private void loadFragment(int resource, Fragment createFrag, int fragId, String fragTg){
+        Fragment checkCurrfrag = fragmentManager.findFragmentByTag(fragTg);
+
+        if(checkCurrfrag == null){
+            currentFrag = fragId;
+            fragmentManager.beginTransaction()
+                    .add(resource, createFrag, fragTg)
+                    .commit();
+        }
+    }
+
+    public void setActionBarTitle(String title){
+        getSupportActionBar().setTitle(title);
     }
 }

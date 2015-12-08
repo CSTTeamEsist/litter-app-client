@@ -15,4 +15,8 @@ public class LaunchFragmentsContract {
 
     // tags for the events
     public static final String EVENT_LIST_TAG = "EVENTLIST";
+    public static final String EVENT_TAG = "EVENT";
+
+    public static final int EVENT_LIST_ID = 3;
+    public static final int EVENT_ID = 4;
 }
