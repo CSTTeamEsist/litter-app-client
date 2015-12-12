@@ -2,21 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.mattbozelka.cleanupstars.EventCollectionsListFragment"
     android:orientation="vertical">
 
 
-    <GridView
-        android:id="@+id/event_collections_list_grid"
+    <ListView
+        android:id="@+id/event_collections_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:verticalSpacing="16dp"
-        android:horizontalSpacing="16dp"
-        android:stretchMode="columnWidth"
-        android:numColumns="2"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

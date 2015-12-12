@@ -2,10 +2,12 @@ package com.mattbozelka.com.mattbozelka.custom.adapters;
 
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mattbozelka.cleanupstars.R;
@@ -16,10 +18,12 @@ import java.util.ArrayList;
 public class LitterListAdapter extends ArrayAdapter<LitterPiece> {
 
     private final String LOG_TAG = LitterListAdapter.class.getSimpleName();
+    private Context context;
     private int layoutId;
 
     public LitterListAdapter(Context context, int layoutId, ArrayList<LitterPiece> data) {
         super(context, 0, data);
+        this.context = context;
         this.layoutId = layoutId;
     }
 
@@ -34,7 +38,7 @@ public class LitterListAdapter extends ArrayAdapter<LitterPiece> {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(layoutId, parent, false);
 
-            holder.tvIcon = (TextView) convertView.findViewById(R.id.tv_icon);
+            holder.imIcon = (ImageView) convertView.findViewById(R.id.iv_icon);
             holder.tvCount = (TextView) convertView.findViewById(R.id.tv_count);
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
             convertView.setTag(holder);
@@ -43,7 +47,10 @@ public class LitterListAdapter extends ArrayAdapter<LitterPiece> {
             holder = (LitterItemHolder) convertView.getTag();
         }
 
-        holder.tvIcon.setText(litterPiece.getIconName());
+        int imageResource = context.getResources().getIdentifier(litterPiece.getIconName(),
+                "drawable", context.getPackageName());
+        Drawable icon = context.getResources().getDrawable(imageResource);
+        holder.imIcon.setImageDrawable(icon);
         holder.tvCount.setText(Long.toString(litterPiece.getCount()));
         holder.tvName.setText(litterPiece.getName());
 
@@ -52,7 +59,7 @@ public class LitterListAdapter extends ArrayAdapter<LitterPiece> {
 
     static class LitterItemHolder
     {
-        TextView tvIcon;
+        ImageView imIcon;
         TextView tvCount;
         TextView tvName;
     }

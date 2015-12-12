@@ -37,6 +37,7 @@ public class CreateAccountFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root =  inflater.inflate(R.layout.fragment_create_account, container, false);
+        ((MainActivity) getActivity()).setActionBarTitle("Create Account");
 
         fname = (EditText) root.findViewById(R.id.createFirstName);
         lname = (EditText) root.findViewById(R.id.createLastName);

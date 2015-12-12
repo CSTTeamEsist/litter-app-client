@@ -49,8 +49,9 @@ public class EventListGetTask extends AsyncTask<Void, Void, ArrayList<Event>> {
             InputStream inputStream = urlConnection.getInputStream();
             StringBuffer buffer = new StringBuffer();
 
+
             if (inputStream == null) {
-                System.out.println("system string was null");
+                Log.i(LOG_TAG, "system string was null");
             }
 
             reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -61,7 +62,7 @@ public class EventListGetTask extends AsyncTask<Void, Void, ArrayList<Event>> {
             }
 
             if (buffer.length() == 0) {
-                System.out.println("buffering was null");
+                Log.i(LOG_TAG, "buffering was null");
             }
 
             eventListJsonStr = buffer.toString();
