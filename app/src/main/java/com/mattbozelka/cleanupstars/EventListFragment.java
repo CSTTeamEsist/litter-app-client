@@ -63,7 +63,7 @@ public class EventListFragment extends Fragment {
 
         // fetch the events from the API
         EventListGetTask getEventsTask = new EventListGetTask(mEventListAdapter);
-        getEventsTask.execute();
+        getEventsTask.execute(); //calls do in background
 
     }
 
