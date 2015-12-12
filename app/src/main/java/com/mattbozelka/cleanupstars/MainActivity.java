@@ -62,12 +62,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
     @Override
     public void onSaveInstanceState(Bundle outState){
 
-            outState.putInt(STORED_FRAG, currentFrag);
+        outState.putInt(STORED_FRAG, currentFrag);
         super.onSaveInstanceState(outState);
     }
 
     public void loadUI(int loadById) {
-
+        
         switch (loadById){
             case LaunchFragmentsContract.LOGIN_SCREEN_ID:
                 // loading the Log in Frag
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
                         LaunchFragmentsContract.CREATE_ACCOUNT_SCREEN_ID,
                         LaunchFragmentsContract.CREATE_ACCOUNT_FRAGMENT_TAG);
                 break;
-            case LaunchFragmentsContract.EVENT_ID:
+            case LaunchFragmentsContract.USER_HOME_SCREEN_ID:
                 // loading the User Home Frag
                 loadFragment(R.id.view_holder,
                         new UserHomeFragment(),
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
         if(checkCurrfrag == null){
             currentFrag = fragId;
             fragmentManager.beginTransaction()
-                    .add(resource, createFrag, fragTg)
+                    .replace(resource, createFrag, fragTg)
                     .commit();
         }
     }

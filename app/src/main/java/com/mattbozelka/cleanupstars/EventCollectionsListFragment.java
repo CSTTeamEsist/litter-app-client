@@ -31,25 +31,25 @@ public class EventCollectionsListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         litterItems.clear();
-        LitterPiece l1 = new LitterPiece("Bags (Paper)", 0, "cig_icon");
-        LitterPiece l2 = new LitterPiece("Bags (Plastic)", 0, "cig_icon");
+        LitterPiece l1 = new LitterPiece("Bags (Paper)", 0, "paper_bag_icon");
+        LitterPiece l2 = new LitterPiece("Bags (Plastic)", 0, "plastic_bag_icon");
         LitterPiece l3 = new LitterPiece("Beverage Bottles (Plastic)", 0, "platic_bottle_icon");
-        LitterPiece l4 = new LitterPiece("Beverage Bottles (Glass)", 0, "cig_icon");
-        LitterPiece l5 = new LitterPiece("Caps, Lids", 0, "cig_icon");
+        LitterPiece l4 = new LitterPiece("Beverage Bottles (Glass)", 0, "bev_bottle_glass_icon");
+        LitterPiece l7 = new LitterPiece("Beverage Cans", 0, "bev_can_icon");
+        LitterPiece l5 = new LitterPiece("Caps, Lids", 0, "caps_icon");
         LitterPiece l6 = new LitterPiece("Cigarette / Cigarette Butts", 0, "cig_icon");
-        LitterPiece l7 = new LitterPiece("Beverage Cans", 0, "cig_icon");
-        LitterPiece l8 = new LitterPiece("Food Wrappers / Containers", 0, "cig_icon");
-        LitterPiece l9 = new LitterPiece("Cups, Plates, Forks, Knives, Spoons", 0, "cig_icon");
-        LitterPiece l10 = new LitterPiece("Straws, Stirrers", 0, "cig_icon");
-        LitterPiece l11 = new LitterPiece("Misc", 0, "cig_icon");
+        LitterPiece l8 = new LitterPiece("Food Wrappers / Containers", 0, "food_wrappers_icon");
+        LitterPiece l9 = new LitterPiece("Cups, Plates, Forks, Knives, Spoons", 0, "utensils_icon");
+        LitterPiece l10 = new LitterPiece("Straws, Stirrers", 0, "straws_icon");
+        LitterPiece l11 = new LitterPiece("Misc", 0, "misc_icon");
 
         litterItems.add(l1);
         litterItems.add(l2);
         litterItems.add(l3);
         litterItems.add(l4);
+        litterItems.add(l7);
         litterItems.add(l5);
         litterItems.add(l6);
-        litterItems.add(l7);
         litterItems.add(l8);
         litterItems.add(l9);
         litterItems.add(l10);

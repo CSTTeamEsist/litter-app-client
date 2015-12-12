@@ -23,7 +23,6 @@ public class LoginFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.i(LOG_TAG, "onCreate");
     }
 
     @Nullable
