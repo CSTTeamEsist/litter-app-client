@@ -3,8 +3,6 @@ package com.mattbozelka.AsyncTasks;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.mattbozelka.callbacks.MainActivityCallback;
-import com.mattbozelka.model.LaunchFragmentsContract;
 import com.mattbozelka.model.Volunteer;
 
 import org.json.JSONException;
@@ -20,7 +18,7 @@ import java.net.URL;
 /**
  * Created by Julie on 12/5/2015.
  */
-public class GetVolunteerTask extends AsyncTask<Volunteer, Void, Volunteer{
+public class GetVolunteerTask extends AsyncTask<Volunteer, Void, Volunteer>{
 
     private final String LOG_TAG = GetVolunteerTask.class.getSimpleName();
     private final String COLLECTION_API_BASE="http://cstserver2a." +
