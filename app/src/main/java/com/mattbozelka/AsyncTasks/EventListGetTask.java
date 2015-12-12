@@ -102,7 +102,7 @@ public class EventListGetTask extends AsyncTask<Void, Void, ArrayList<Event>> {
     }
 
     private ArrayList<Event> extractData(String eventListJsonStr) throws JSONException {
-
+//parses JsonStr to ArrayList
         ArrayList<Event> dataEvents = new ArrayList<Event>();
 
         // Items to extract
@@ -115,9 +115,9 @@ public class EventListGetTask extends AsyncTask<Void, Void, ArrayList<Event>> {
 
         for(int i = 0; i < eventsLength; ++i) {
 
-            JSONObject event = eventsArray.getJSONObject(i);
+            JSONObject event = eventsArray.getJSONObject(i);//JSONObject user = new JSONObject;
 
-            String date = event.getString(EVENT_DATE);
+            String date = event.getString(EVENT_DATE);//EVENT_DATE is the name of the node inJSON
             String location = event.getString(EVENT_LOCATION);
             int id = event.getInt(EVENT_ID);
 
