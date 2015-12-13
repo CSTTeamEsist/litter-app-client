@@ -18,10 +18,11 @@ public class CreateAccountFragment extends Fragment{
 
     private final String LOG_TAG = CreateAccountFragment.class.getSimpleName();
     private Context context;
-    static final String FNAME = "userFname";
-    static final String LNAME = "puserLname";
-    static final String EMAIL = "userEmail";
-    static final String PASSWORD = "userPw";
+    private static final String FNAME = "userFname";
+    private static final String LNAME = "puserLname";
+    private static final String EMAIL = "userEmail";
+    private static final String PASSWORD = "userPw";
+    static final String ERROR = "formError";
     private EditText fname;
     private EditText lname;
     private EditText password;
@@ -61,6 +62,8 @@ public class CreateAccountFragment extends Fragment{
             lname.setText(savedInstanceState.getString(LNAME));
             email.setText(savedInstanceState.getString(EMAIL));
             password.setText(savedInstanceState.getString(PASSWORD));
+            if(savedInstanceState.getInt(ERROR) == View.VISIBLE)
+                errorMessage.setVisibility(View.VISIBLE);
         }
 
         super.onActivityCreated(savedInstanceState);

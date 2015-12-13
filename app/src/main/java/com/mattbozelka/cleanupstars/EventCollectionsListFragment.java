@@ -1,6 +1,8 @@
 package com.mattbozelka.cleanupstars;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.mattbozelka.AsyncTasks.GetEventCollections;
+import com.mattbozelka.AsyncTasks.UpdateCollectionCount;
+import com.mattbozelka.callbacks.GetEventId;
 import com.mattbozelka.com.mattbozelka.custom.adapters.LitterListAdapter;
 import com.mattbozelka.model.LitterPiece;
 
@@ -19,42 +24,15 @@ import java.util.ArrayList;
 public class EventCollectionsListFragment extends Fragment {
 
     private final String LOG_TAG = EventCollectionsListFragment.class.getSimpleName();
+    private SharedPreferences sharedPref;
     private LitterListAdapter mLitterListAdapter;
     private ArrayList<LitterPiece> litterItems = new ArrayList<LitterPiece>();
+    private int eventId;
+    private int userLoggedIn;
 
     public EventCollectionsListFragment() {
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        litterItems.clear();
-        LitterPiece l1 = new LitterPiece("Bags (Paper)", 0, "paper_bag_icon");
-        LitterPiece l2 = new LitterPiece("Bags (Plastic)", 0, "plastic_bag_icon");
-        LitterPiece l3 = new LitterPiece("Beverage Bottles (Plastic)", 0, "platic_bottle_icon");
-        LitterPiece l4 = new LitterPiece("Beverage Bottles (Glass)", 0, "bev_bottle_glass_icon");
-        LitterPiece l7 = new LitterPiece("Beverage Cans", 0, "bev_can_icon");
-        LitterPiece l5 = new LitterPiece("Caps, Lids", 0, "caps_icon");
-        LitterPiece l6 = new LitterPiece("Cigarette / Cigarette Butts", 0, "cig_icon");
-        LitterPiece l8 = new LitterPiece("Food Wrappers / Containers", 0, "food_wrappers_icon");
-        LitterPiece l9 = new LitterPiece("Cups, Plates, Forks, Knives, Spoons", 0, "utensils_icon");
-        LitterPiece l10 = new LitterPiece("Straws, Stirrers", 0, "straws_icon");
-        LitterPiece l11 = new LitterPiece("Misc", 0, "misc_icon");
-
-        litterItems.add(l1);
-        litterItems.add(l2);
-        litterItems.add(l3);
-        litterItems.add(l4);
-        litterItems.add(l7);
-        litterItems.add(l5);
-        litterItems.add(l6);
-        litterItems.add(l8);
-        litterItems.add(l9);
-        litterItems.add(l10);
-        litterItems.add(l11);
-    }
 
 
     @Override
@@ -62,6 +40,9 @@ public class EventCollectionsListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_event_collections_list, container, false);
+
+        litterItems.clear();
+        eventId = ((GetEventId) getActivity()).getEventId();
 
         mLitterListAdapter = new LitterListAdapter(
                 getActivity(),
@@ -75,6 +56,18 @@ public class EventCollectionsListFragment extends Fragment {
         litterGridView.setOnItemClickListener(new ItemAdded());
         litterGridView.setOnItemLongClickListener(new ItemRemoved());
 
+        sharedPref = getActivity()
+                .getSharedPreferences(getString(R.string.store_user_tag), Context.MODE_PRIVATE);
+        int defaultUser = Integer.parseInt(getString(R.string.saved_user_default));
+        userLoggedIn = sharedPref.getInt(getString(R.string.store_user_tag), defaultUser);
+
+        GetEventCollections getEventCollectionsTask = new GetEventCollections(
+                userLoggedIn,
+                eventId,
+                mLitterListAdapter
+        );
+        getEventCollectionsTask.execute();
+
         return rootView;
     }
 
@@ -82,12 +75,16 @@ public class EventCollectionsListFragment extends Fragment {
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            long count;
+
             LitterPiece litterPiece = litterItems.get(position);
-            count = litterPiece.getCount();
-            count++;
-            litterPiece.setCount(count);
-            mLitterListAdapter.notifyDataSetChanged();
+
+            updateCount(
+                    litterPiece,
+                    userLoggedIn + "",
+                    eventId + "",
+                    true
+            );
+
         }
     }
 
@@ -97,18 +94,29 @@ public class EventCollectionsListFragment extends Fragment {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-            long count;
             LitterPiece litterPiece = litterItems.get(position);
-            count = litterPiece.getCount();
 
-            if(count == 0)
-                return true;
-
-            count--;
-            litterPiece.setCount(count);
-            mLitterListAdapter.notifyDataSetChanged();
+            updateCount(
+                    litterPiece,
+                    userLoggedIn + "",
+                    eventId + "",
+                    false
+            );
             return true;
         }
 
+    }
+
+    private void updateCount(LitterPiece litterPiece, String volunteer, String event, boolean addTo){
+
+        UpdateCollectionCount update = new UpdateCollectionCount(
+                litterPiece,
+                volunteer,
+                "1",
+                event,
+                addTo,
+                mLitterListAdapter
+        );
+        update.execute();
     }
 }

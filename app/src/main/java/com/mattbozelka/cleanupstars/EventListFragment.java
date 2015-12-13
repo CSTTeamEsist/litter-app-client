@@ -1,13 +1,16 @@
 package com.mattbozelka.cleanupstars;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.mattbozelka.AsyncTasks.EventListGetTask;
 import com.mattbozelka.com.mattbozelka.custom.adapters.EventListAdapter;
@@ -63,11 +66,22 @@ public class EventListFragment extends Fragment {
 
     private class LaunchEventAction implements AdapterView.OnItemClickListener{
 
+        private Activity activity = getActivity();
+
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+            SharedPreferences sharedPref = activity
+                    .getSharedPreferences(getString(R.string.store_user_tag), Context.MODE_PRIVATE);
+            int defaultUser = Integer.parseInt(getString(R.string.saved_user_default));
+            int userLoggedIn = sharedPref.getInt(getString(R.string.store_user_tag), defaultUser);
             int eventId = events.get(position).getEventId();
-            Toast.makeText(getActivity(), "Launch event " + eventId, Toast.LENGTH_SHORT).show();
+
+            if (userLoggedIn != -1) {
+                Intent intent = new Intent(activity, EventsCollectionsActivity.class);
+                intent.putExtra("EventId", eventId);
+                activity.startActivity(intent);
+            }
 
         }
 

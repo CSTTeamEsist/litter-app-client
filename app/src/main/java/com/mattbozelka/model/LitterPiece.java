@@ -4,6 +4,7 @@ package com.mattbozelka.model;
 public class LitterPiece {
 
     private String name;
+    private int litterId;
     private long count;
     private String iconName;
 
@@ -11,12 +12,14 @@ public class LitterPiece {
         this.name = null;
         this.count = 0;
         this.iconName = null;
+        this.litterId = 0;
     }
 
-    public LitterPiece(String name, long count, String iconName) {
+    public LitterPiece(String name, long count, String iconName, int litterId) {
         this.name = name;
         this.count = count;
         this.iconName = iconName;
+        this.litterId = litterId;
     }
 
     public String getName() {
@@ -41,6 +44,14 @@ public class LitterPiece {
 
     public void setIconName(String iconName) {
         this.iconName = iconName;
+    }
+
+    public int getLitterId() {
+        return litterId;
+    }
+
+    public void setLitterId(int litterId) {
+        this.litterId = litterId;
     }
 
 }

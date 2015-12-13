@@ -36,10 +36,10 @@ public class CreateVolunteerTask extends AsyncTask<Void, Void, Integer> {
     private Activity activity;
     private int userID;
 
-    String fname;
-    String lname;
-    String email;
-    String password;
+    private String fname;
+    private String lname;
+    private String email;
+    private String password;
 
     public CreateVolunteerTask(String fname, String lname, String email, String password,
                                Activity activity) {

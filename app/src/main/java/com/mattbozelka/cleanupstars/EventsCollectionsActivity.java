@@ -11,15 +11,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.mattbozelka.callbacks.GetEventId;
+import com.mattbozelka.model.LaunchFragmentsContract;
+
 /**
  * Created by Captain on 12/12/15.
  */
-public class EventsCollectionsActivity extends AppCompatActivity{
+public class EventsCollectionsActivity extends AppCompatActivity implements GetEventId {
 
-    private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private final String LOG_TAG = EventsCollectionsActivity.class.getSimpleName();
     private FragmentManager fragmentManager = getFragmentManager();
     private SharedPreferences sharedPref;
     private Toolbar toolbar;
+    private int eventId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,15 @@ public class EventsCollectionsActivity extends AppCompatActivity{
         setContentView(R.layout.activity_events_collection);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fragmentManager.beginTransaction()
+                .add(R.id.view_holder,
+                        new EventCollectionsListFragment(),
+                        LaunchFragmentsContract.EVENT_TAG)
+                .commit();
+
+        Intent intent = getIntent();
+        eventId = intent.getIntExtra("EventId", -1);
 
     }
 
@@ -64,5 +77,9 @@ public class EventsCollectionsActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public int getEventId() {
+        return eventId;
+    }
 }
 
