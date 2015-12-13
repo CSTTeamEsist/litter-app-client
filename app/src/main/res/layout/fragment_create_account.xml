@@ -21,54 +21,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
+                android:hint="@string/fnameLabel"
                 android:ems="10"
                 android:id="@+id/createFirstName" />
-
-            <TextView
-                style="@style/TextViewLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/fnameLabel"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
+                android:hint="@string/lnameLabel"
                 android:ems="10"
                 android:id="@+id/createLastName" />
-
-            <TextView
-                style="@style/TextViewLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/lnameLabel"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
+                android:hint="@string/emailLabel"
                 android:ems="10"
                 android:id="@+id/loginTextEmail" />
-
-            <TextView
-                style="@style/TextViewLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/emailLabel"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:hint="@string/passwordLabel"
                 android:ems="10"
                 android:id="@+id/loginTextPassword" />
-
-            <TextView
-                style="@style/TextViewLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/passwordLabel"
-                android:paddingBottom="20dp"/>
 
             <Button
                 android:layout_width="match_parent"

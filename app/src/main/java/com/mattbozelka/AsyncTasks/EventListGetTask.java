@@ -103,7 +103,7 @@ public class EventListGetTask extends AsyncTask<Void, Void, ArrayList<Event>> {
     }
 
     private ArrayList<Event> extractData(String eventListJsonStr) throws JSONException {
-//parses JsonStr to ArrayList
+        //parses JsonStr to ArrayList
         ArrayList<Event> dataEvents = new ArrayList<Event>();
 
         // Items to extract

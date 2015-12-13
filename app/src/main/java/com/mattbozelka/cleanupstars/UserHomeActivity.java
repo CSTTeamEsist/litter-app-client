@@ -1,6 +1,5 @@
 package com.mattbozelka.cleanupstars;
 
-
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -14,22 +13,26 @@ import android.view.MenuItem;
 
 import com.mattbozelka.model.LaunchFragmentsContract;
 
-public class EventManagementActivity extends AppCompatActivity {
-    private final String LOG_TAG = EventManagementActivity.class.getSimpleName();
+/**
+ * Created by Captain on 12/12/15.
+ */
+public class UserHomeActivity extends AppCompatActivity {
+
+    private final String LOG_TAG = UserHomeActivity.class.getSimpleName();
     private FragmentManager fragmentManager = getFragmentManager();
     private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_management);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_user_home);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         fragmentManager.beginTransaction()
                 .add(R.id.view_holder,
-                        new EventListFragment(),
-                        LaunchFragmentsContract.EVENT_LIST_TAG)
+                        new UserHomeFragment(),
+                        LaunchFragmentsContract.USER_HOME_FRAGMENT_TAG)
                 .commit();
 
     }

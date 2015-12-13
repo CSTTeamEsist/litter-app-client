@@ -62,8 +62,6 @@ public class EventCollectionsListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_event_collections_list, container, false);
-        ((EventManagementActivity) getActivity()).setActionBarTitle("Santa Cruz");
-        ((EventManagementActivity) getActivity()).setActionBarSubTitle("Check List");
 
         mLitterListAdapter = new LitterListAdapter(
                 getActivity(),

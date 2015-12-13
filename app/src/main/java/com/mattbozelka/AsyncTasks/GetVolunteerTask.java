@@ -1,16 +1,25 @@
 package com.mattbozelka.AsyncTasks;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
+import com.mattbozelka.cleanupstars.R;
+import com.mattbozelka.cleanupstars.UserHomeActivity;
 import com.mattbozelka.model.Volunteer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -18,70 +27,83 @@ import java.net.URL;
 /**
  * Created by Julie on 12/5/2015.
  */
-public class GetVolunteerTask extends AsyncTask<Volunteer, Void, Volunteer>{
+public class GetVolunteerTask extends AsyncTask<Void, Void, Integer>{
 
     private final String LOG_TAG = GetVolunteerTask.class.getSimpleName();
-    private final String COLLECTION_API_BASE="http://cstserver2a." +
-            "bitnamiapp.com/litter-service-webapp/webapi/volunteer";
-    private String username;
+    private String loginUrl ="http://cstserver2a.bitnamiapp.com/" +
+            "litter-service-webapp/webapi/login/";
+    private String userEmail;
     private String password;
-  //  private Volunteer currentUser;
+    private TextView errorView;
+    private int userID;
+    private Activity activity;
 
-    public GetVolunteerTask(Volunteer currentUser) {
-        this.username = currentUser.getEmailAddress();
+    public GetVolunteerTask(Volunteer currentUser,
+                            int userID,
+                            TextView errorView,
+                            Activity activity) {
+        this.userEmail = currentUser.getEmailAddress();
         this.password = currentUser.getPassword();
+        this.userID = userID;
+        this.errorView = errorView;
+        this.activity = activity;
     }
 
-    protected Volunteer doInBackground(Volunteer... params) {
+    protected Integer doInBackground(Void... params) {
 
         HttpURLConnection urlConnection = null;
-        BufferedReader in = null;
+        BufferedReader reader = null;
         String volunteerJsonStr = null;
-        Volunteer volunteer;
-        StringBuilder buffer = new StringBuilder();
-        StringBuilder response = new StringBuilder();
+
+        if(TextUtils.isEmpty(userEmail) &&
+                TextUtils.isEmpty(password)){
+            return -1;
+        }
 
         try {
-            URL url = new URL(COLLECTION_API_BASE);
+            loginUrl += userEmail + "/" + password;
+
+            URL url = new URL(loginUrl);
 
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("POST");
+            urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-            // Send post request
-            urlConnection.setDoOutput(true);
-            DataOutputStream userInfo = new DataOutputStream(urlConnection.getOutputStream());
-            //userInfo.writeBytes( ????????);
-            userInfo.flush();
-            userInfo.close();
+            InputStream inputStream = urlConnection.getInputStream();
+            StringBuffer buffer = new StringBuffer();
 
+            if (inputStream == null) {
+                Log.i(LOG_TAG, "system string was null");
+            }
 
-            //get data
-            in = new BufferedReader(
-                    new InputStreamReader(urlConnection.getInputStream()));
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                buffer.append(inputLine + "\n");
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line + "\n");
             }
 
             if (buffer.length() == 0) {
-                System.out.println("buffering was null");
+                Log.i(LOG_TAG, "buffering was null");
             }
 
             volunteerJsonStr = buffer.toString();
 
         } catch (IOException e) {
-            return null;
 
+            Log.i(LOG_TAG, "connection failed");
+            return -1;
 
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
-            if (in != null) {
+
+            if (reader != null) {
                 try {
-                    in.close();
+                    reader.close();
                 } catch (final IOException e) {
+                    Log.e(LOG_TAG, "Error closing stream", e);
                 }
             }
 
@@ -97,26 +119,45 @@ public class GetVolunteerTask extends AsyncTask<Volunteer, Void, Volunteer>{
 
         }
 
-        return null;
+        return -1;
     }
 
-    protected void onPostExecute(int userID) {
+    protected void onPostExecute(Integer id) {
+
+        if(id == -1){
+            errorView.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        userID = id;
+        errorView.setVisibility(View.INVISIBLE);
+        setUserAsLoggedIn();
+        Intent intent = new Intent(activity, UserHomeActivity.class);
+        activity.startActivity(intent);
 
     }
 
-    private  Volunteer extractData (String volunteerJsonStr) throws JSONException {
-        Volunteer currentUser = null;
-        final String VOL_ID="volID";
-        final String FNAME = "firstName";
-        final String LNAME = "lastName";
-        final String EMAIL = "email";
-        final String PASSWORD = "password";
+    private void setUserAsLoggedIn(){
+        String userTag = activity.getResources().getString(R.string.store_user_tag);
+        SharedPreferences sharedPref = activity.getSharedPreferences(
+                activity.getString(R.string.store_user_tag),
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(userTag, userID);
+        editor.commit();
+    }
 
-        JSONObject JSONUser = new JSONObject(volunteerJsonStr);
-        currentUser.setVolID(JSONUser.getInt(VOL_ID));
-        currentUser.setFName(JSONUser.getString(FNAME));
-        currentUser.setLName(JSONUser.getString(LNAME));
+    private  Integer extractData (String volunteerJsonStr) throws JSONException {
 
-        return currentUser;
+        final String VOL_ID = "userID";
+
+        JSONObject user = new JSONObject(volunteerJsonStr);
+        String userid = user.getString(VOL_ID);
+
+        if(!TextUtils.isEmpty(userid)){
+            return Integer.parseInt(userid);
+        }
+
+        return -1;
     }
 }

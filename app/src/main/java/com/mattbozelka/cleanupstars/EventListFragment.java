@@ -48,12 +48,6 @@ public class EventListFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        // System pref example for when ready
-//        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//        String checkSortOrder = prefs.getString(getString(R.string.display_preferences_sort_order_key),
-//                getString(R.string.display_preferences_sort_default_value));
-
-
         getEvents();
 
     }

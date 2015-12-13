@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.mattbozelka.AsyncTasks.CreateVolunteerTask;
+
 public class CreateAccountFragment extends Fragment{
 
     private final String LOG_TAG = CreateAccountFragment.class.getSimpleName();
@@ -37,7 +39,6 @@ public class CreateAccountFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root =  inflater.inflate(R.layout.fragment_create_account, container, false);
-        ((MainActivity) getActivity()).setActionBarTitle("Create Account");
 
         fname = (EditText) root.findViewById(R.id.createFirstName);
         lname = (EditText) root.findViewById(R.id.createLastName);
@@ -51,15 +52,6 @@ public class CreateAccountFragment extends Fragment{
         return root;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -85,21 +77,6 @@ public class CreateAccountFragment extends Fragment{
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
 
     private class CreateAccountAction implements View.OnClickListener{
 
@@ -118,11 +95,14 @@ public class CreateAccountFragment extends Fragment{
                     isValidEmail(emInput)){
 
                 errorMessage.setVisibility(View.INVISIBLE);
-                // info is all there and email is valid
-                // so call out to server to add user
-
-                //            ((MainActivityCallback) getActivity())
-//                    .loadUI(LaunchFragmentsContract.USER_HOME_SCREEN_ID);
+                CreateVolunteerTask createVolunteerTask = new CreateVolunteerTask(
+                        fnameInput,
+                        lnameInput,
+                        emInput,
+                        pwInput,
+                        getActivity()
+                );
+                createVolunteerTask.execute();
 
             }else{
 

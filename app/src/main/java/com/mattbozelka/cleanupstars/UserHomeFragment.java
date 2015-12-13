@@ -19,6 +19,7 @@ public class UserHomeFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -31,6 +32,7 @@ public class UserHomeFragment extends Fragment{
 
         return root;
     }
+
 
     private class ViewEventsAction implements View.OnClickListener{
 
