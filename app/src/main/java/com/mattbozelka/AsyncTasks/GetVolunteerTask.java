@@ -1,5 +1,24 @@
 package com.mattbozelka.AsyncTasks;
 
+/*
+*
+* GetVolunteerTask
+*
+* Background Task
+*
+* Uses a RESTful GET connection to the server to receive a JSON object of a specific User. Used
+* within the login screen. Sends a password and an email address in the get request, and if the
+* information matches a DB item then that item in the DB is returned back in the response.
+*
+* Constructor expects:
+* Volunteer currentUser - a volunteer object that contains the entered password and email by
+*   a user trying to log in
+* int userID - an integer that will hold the ID of the user on a successful query,
+* TextView errorView - UI text view to display any error messages,
+* Activity activity - the calling activity
+*
+* */
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -24,9 +43,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by Julie on 12/5/2015.
- */
 public class GetVolunteerTask extends AsyncTask<Void, Void, Integer>{
 
     private final String LOG_TAG = GetVolunteerTask.class.getSimpleName();

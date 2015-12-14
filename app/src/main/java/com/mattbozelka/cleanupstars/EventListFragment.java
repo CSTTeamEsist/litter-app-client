@@ -1,5 +1,15 @@
 package com.mattbozelka.cleanupstars;
 
+/*
+*
+* EventListFragment - UI Fragment
+*
+* Fragment loads the Event List UI and handle the logic for Event List
+*
+* Associated XML - fragment_event_list.xml
+*
+* */
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;

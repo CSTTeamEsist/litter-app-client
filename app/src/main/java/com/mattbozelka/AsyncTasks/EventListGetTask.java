@@ -1,5 +1,21 @@
 package com.mattbozelka.AsyncTasks;
 
+/*
+*
+* EventListGetTask
+*
+* Background Task
+*
+* Uses a RESTful GET connection to the server to receive a JSON object of all the events in the
+* DB. It then parses the JSON object and updates the UI thread to display the information.
+*
+* Constructor expects:
+* EventListAdapter events - a custom adapter that gets updated with the event list, that then gets
+*   displayed to the user
+*
+* */
+
+
 import android.os.AsyncTask;
 import android.util.Log;
 

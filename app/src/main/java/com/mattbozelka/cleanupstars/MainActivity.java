@@ -1,5 +1,19 @@
 package com.mattbozelka.cleanupstars;
 
+/*
+*
+* MainActivity - UI Activity
+*
+* Main activity that loads first. Checks if
+* user is already logged in. If so the User's home is launched, other wides
+* it loads the LoginFragment
+*
+* Loads a LoginFragment
+*
+* Associated XML - activity_main.xml
+*
+* */
+
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;

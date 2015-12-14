@@ -1,5 +1,24 @@
 package com.mattbozelka.model;
 
+/*
+*
+* LitterPiece - Model Object
+*
+* LitterPiece represents a piece of litter that can be collected at an event.
+*
+* Data elements include:
+* String name - name of the LitterPiece
+* int litterId - id of the LitterPiece in database
+* long count - Current count of pieces collected by user
+* String iconName - name of the icon to be used in the UI
+*
+* Default Constructor sets all data elements to elements type default
+*
+* Non-default Constructor sets all elements to the supplied values
+*
+* includes getters and setters for all data elements
+*
+* */
 
 public class LitterPiece {
 

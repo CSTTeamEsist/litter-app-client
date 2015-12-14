@@ -1,5 +1,18 @@
 package com.mattbozelka.cleanupstars;
 
+/*
+*
+* EventsCollectionsActivity - UI Activity
+*
+* Activity that handles and loads the Event Collections List
+*
+* Loads a EventCollectionsListFragment
+*
+* Associated XML - activity_events_collection.xml
+*
+* */
+
+
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +27,6 @@ import android.view.MenuItem;
 import com.mattbozelka.callbacks.GetEventId;
 import com.mattbozelka.model.LaunchFragmentsContract;
 
-/**
- * Created by Captain on 12/12/15.
- */
 public class EventsCollectionsActivity extends AppCompatActivity implements GetEventId {
 
     private final String LOG_TAG = EventsCollectionsActivity.class.getSimpleName();
@@ -33,7 +43,7 @@ public class EventsCollectionsActivity extends AppCompatActivity implements GetE
         setSupportActionBar(toolbar);
 
         fragmentManager.beginTransaction()
-                .add(R.id.view_holder,
+                .add(R.id.view_holder_event_collections,
                         new EventCollectionsListFragment(),
                         LaunchFragmentsContract.EVENT_TAG)
                 .commit();

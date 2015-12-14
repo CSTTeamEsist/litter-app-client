@@ -1,7 +1,24 @@
 package com.mattbozelka.model;
 
 /**
- * Created by Julie on 12/5/2015.
+ *
+ * Volunteer - Model Object
+ *
+ * Used to represent a Volunteer in the UI and communicate back to the server
+ *
+ * Data elements:
+ * int volID - volunteer id used in database and to store locally if logged in
+ * String fName - first name of volunteer
+ * String lName - last name of volunteer
+ * String emailAddress - email address of the volunteer
+ * String password - ***( should be removed in future iterations for security )***
+ *
+ * Default constructor creates a blank volunteer with default values
+ *
+ * Non-default constructor - sets all data elements to values supplied
+ *
+ * includes getters and setters for all elements
+ *
  */
 
 

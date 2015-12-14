@@ -1,5 +1,22 @@
 package com.mattbozelka.model;
 
+/*
+*
+* Event - Model Object
+*
+* This is the Object used to represent an event presented to the user.
+*
+* Data elements include:
+* String eventDate - date of the event
+* String eventLocation - location of the event
+* String eventId - id of the event stored in DB
+*
+* Default constructor sets all to null. Non default takes an eventDate, eventLocation, and eventId
+* and sets the correct data elements.
+*
+* Includes getters and setters for each element
+*
+* */
 
 public class Event {
     private String eventDate;

@@ -1,5 +1,15 @@
 package com.mattbozelka.cleanupstars;
 
+/*
+*
+* CreateAccountFragment - UI Fragment
+*
+* Fragment that handles all the UI logic for a user to create an account
+*
+* Associated XML - fragment_create_account.xml
+*
+* */
+
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;

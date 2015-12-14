@@ -1,5 +1,22 @@
 package com.mattbozelka.AsyncTasks;
 
+/*
+*
+* GetEventCollections
+*
+* Background Task
+*
+* Uses a RESTful GET connection to the server to receive a JSON object of a specific Event's
+* Collection object list for a specific volunteer. It then gets displayed to the UI.
+*
+* Constructor expects:
+* int userID - the id of the volunteer who's list is being retrieved,
+* int eventID - the id of the event list to retrieve,
+* LitterListAdapter adapter - the adapter tied to the UI so it can be updated on the UI thread to
+*   display the list
+*
+* */
+
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -105,6 +122,7 @@ public class GetEventCollections extends AsyncTask<Void, Void, ArrayList<LitterP
 
     protected void onPostExecute(ArrayList<LitterPiece> list) {
 
+        adapter.clear();
         for(LitterPiece lp : list){
             adapter.add(lp);
         }

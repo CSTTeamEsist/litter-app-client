@@ -1,5 +1,16 @@
 package com.mattbozelka.cleanupstars;
 
+/*
+*
+* EventManagementActivity - UI Activity
+*
+* Activity that handles and loads the list of events
+*
+* Loads a EventListFragment
+*
+* Associated XML - activity_event_list.xml
+*
+* */
 
 import android.app.FragmentManager;
 import android.content.Context;

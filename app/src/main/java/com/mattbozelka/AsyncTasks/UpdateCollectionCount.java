@@ -1,5 +1,27 @@
 package com.mattbozelka.AsyncTasks;
 
+/*
+*
+* UpdateCollectionCount
+*
+* Background Task
+*
+* Uses a RESTful POST connection to the server that sends a JSON object containing the information
+* needed to update the count of a litterPiece in the DB. It doesn't expect anything in return
+* but tests to check if it was successful before updating the UI.
+*
+* Constructor expects:
+* LitterPiece lp - a LitterPiece object in the list that needs to be updated,
+* String volID - Volunteer ID to update the correct users list,
+* String teamID - team ID (will be used in future uses),
+* String eventID - the ID of the event the litter came from,
+* boolean addTo - boolean to say if a piece should be addded or subtracted, true for add, and false
+*   for removal
+* LitterListAdapter mLitterListAdapter - Custom List adapter to update on a successful operation
+*   so the UI gets updated as well.
+*
+* */
+
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -14,9 +36,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by Captain on 12/12/15.
- */
 public class UpdateCollectionCount extends AsyncTask<Void, Void, Boolean> {
 
     private final String LOG_TAG = UpdateCollectionCount.class.getSimpleName();

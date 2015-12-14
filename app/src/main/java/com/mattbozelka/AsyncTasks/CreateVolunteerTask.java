@@ -1,5 +1,25 @@
 package com.mattbozelka.AsyncTasks;
 
+/**
+ *
+ * CreateVolunteerTask
+ *
+ * Background Task
+ *
+ * A RESTful POST request that sends a Json object of user information to server for the server
+ * to create the user in the database. If successful the user is then logged in or it updates
+ * the UI to inform of the error.
+ *
+ * Constructor expects:
+ * String fname - user first name, comes from user input,
+ * String lname - user last name, comes from user input,
+ * String email - desired user email address, comes from user input,
+ * String password - desired user password, comes from user input,
+ * Activity activity - the activity that is the calling the background task
+ *
+ */
+
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,9 +41,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by Captain on 12/12/15.
- */
+
 public class CreateVolunteerTask extends AsyncTask<Void, Void, Integer> {
 
     private final String LOG_TAG = CreateVolunteerTask.class.getSimpleName();

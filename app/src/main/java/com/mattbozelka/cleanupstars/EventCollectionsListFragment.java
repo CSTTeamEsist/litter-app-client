@@ -1,5 +1,15 @@
 package com.mattbozelka.cleanupstars;
 
+/*
+*
+* EventCollectionsListFragment - UI Fragment
+*
+* Fragment loads the the collection for a specific event of a specific user
+*
+* Associated XML - fragment_event_collections_list.xml
+*
+* */
+
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,9 +28,6 @@ import com.mattbozelka.model.LitterPiece;
 
 import java.util.ArrayList;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class EventCollectionsListFragment extends Fragment {
 
     private final String LOG_TAG = EventCollectionsListFragment.class.getSimpleName();
@@ -40,8 +47,6 @@ public class EventCollectionsListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_event_collections_list, container, false);
-
-        litterItems.clear();
         eventId = ((GetEventId) getActivity()).getEventId();
 
         mLitterListAdapter = new LitterListAdapter(
@@ -61,6 +66,13 @@ public class EventCollectionsListFragment extends Fragment {
         int defaultUser = Integer.parseInt(getString(R.string.saved_user_default));
         userLoggedIn = sharedPref.getInt(getString(R.string.store_user_tag), defaultUser);
 
+
+        return rootView;
+    }
+
+    @Override
+    public void onStart() {
+
         GetEventCollections getEventCollectionsTask = new GetEventCollections(
                 userLoggedIn,
                 eventId,
@@ -68,8 +80,9 @@ public class EventCollectionsListFragment extends Fragment {
         );
         getEventCollectionsTask.execute();
 
-        return rootView;
+        super.onStart();
     }
+
 
     private class ItemAdded implements AdapterView.OnItemClickListener{
 

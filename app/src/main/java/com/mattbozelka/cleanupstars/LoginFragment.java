@@ -1,5 +1,15 @@
 package com.mattbozelka.cleanupstars;
 
+/*
+*
+* LoginFragment - UI Fragment
+*
+* Fragment loads the Login UI and handle the logic for the Login
+*
+* Associated XML - fragment_login.xml
+*
+* */
+
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;

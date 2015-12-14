@@ -1,5 +1,17 @@
 package com.mattbozelka.cleanupstars;
 
+/*
+*
+* UserHomeActivity - UI Activity
+*
+* Activity for the users home screen.
+*
+* Loads a UserHomeFragment
+*
+* Associated XML - activity_user_home.xml
+*
+* */
+
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +25,6 @@ import android.view.MenuItem;
 
 import com.mattbozelka.model.LaunchFragmentsContract;
 
-/**
- * Created by Captain on 12/12/15.
- */
 public class UserHomeActivity extends AppCompatActivity {
 
     private final String LOG_TAG = UserHomeActivity.class.getSimpleName();

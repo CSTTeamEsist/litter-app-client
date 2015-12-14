@@ -1,5 +1,15 @@
 package com.mattbozelka.cleanupstars;
 
+/*
+*
+* UserHomeFragment - UI Fragment
+*
+* Fragment loads the User home UI and handle the logic for the User home
+*
+* Associated XML - fragment_user_home.xml
+*
+* */
+
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;

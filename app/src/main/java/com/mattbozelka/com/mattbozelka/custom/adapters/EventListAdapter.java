@@ -1,5 +1,19 @@
 package com.mattbozelka.com.mattbozelka.custom.adapters;
 
+/*
+*
+* EventListAdapter
+*
+* Custom Array Adapter used to extend the android simple array adapter.
+*
+* It displays a list of events based on an event by event Location and Date. It also implements
+* a "+" icon to insinuate that it is clickable to launch that specific event.
+*
+* Associated xml resource: event_item.xml
+*
+* Purely presentational.
+*
+* */
 
 import android.content.Context;
 import android.view.LayoutInflater;

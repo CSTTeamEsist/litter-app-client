@@ -1,5 +1,20 @@
 package com.mattbozelka.com.mattbozelka.custom.adapters;
 
+/*
+*
+* LitterListAdapter
+*
+* Custom ArrayAdapter used to display a LitterPiece item that can be collected. Based off of a
+* Litter object.
+*
+* Displays to the screen the name of the LitterPiece, an icon for the LitterPiece, as well
+* as the current count of a LitterPiece that a volunteer has collected for the piece.
+*
+* Associated XML: litter_item.xml
+*
+* purely presentational
+*
+* */
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
