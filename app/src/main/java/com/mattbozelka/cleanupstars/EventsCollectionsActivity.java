@@ -43,7 +43,7 @@ public class EventsCollectionsActivity extends AppCompatActivity implements GetE
         setSupportActionBar(toolbar);
 
         fragmentManager.beginTransaction()
-                .add(R.id.view_holder_event_collections,
+                .replace(R.id.view_holder_event_collections,
                         new EventCollectionsListFragment(),
                         LaunchFragmentsContract.EVENT_TAG)
                 .commit();

@@ -39,7 +39,7 @@ public class UserHomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         fragmentManager.beginTransaction()
-                .add(R.id.view_holder,
+                .replace(R.id.view_holder,
                         new UserHomeFragment(),
                         LaunchFragmentsContract.USER_HOME_FRAGMENT_TAG)
                 .commit();

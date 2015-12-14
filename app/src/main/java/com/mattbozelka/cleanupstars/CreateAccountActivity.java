@@ -33,7 +33,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         fragmentManager.beginTransaction()
-                .add(R.id.view_holder,
+                .replace(R.id.view_holder,
                         new CreateAccountFragment(),
                         LaunchFragmentsContract.CREATE_ACCOUNT_FRAGMENT_TAG)
                 .commit();

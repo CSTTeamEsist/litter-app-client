@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity{
 
         if(userLoggedIn == defaultUser){
             fragmentManager.beginTransaction()
-                    .add(R.id.view_holder,
+                    .replace(R.id.view_holder,
                             new LoginFragment(),
                             LaunchFragmentsContract.LOGIN_FRAGMENT_TAG)
                     .commit();

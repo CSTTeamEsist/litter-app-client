@@ -38,7 +38,7 @@ public class EventManagementActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         fragmentManager.beginTransaction()
-                .add(R.id.view_holder,
+                .replace(R.id.view_holder,
                         new EventListFragment(),
                         LaunchFragmentsContract.EVENT_LIST_TAG)
                 .commit();
